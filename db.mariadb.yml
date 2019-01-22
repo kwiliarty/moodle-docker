@@ -17,3 +17,8 @@ services:
       MYSQL_USER: moodle
       MYSQL_PASSWORD: "m@0dl3ing"
       MYSQL_DATABASE: moodle
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
