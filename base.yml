@@ -7,6 +7,9 @@ services:
     volumes:
       - "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
       - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/apache2_faildumps.conf"
+      - moodle_dataroot:/var/www/moodledata
+      - behat_dataroot:/var/www/behatdata
+      - phpunit_dataroot:/var/www/phpunit_data
     environment:
       MOODLE_DOCKER_DBTYPE: pgsql
       MOODLE_DOCKER_DBNAME: moodle
@@ -31,3 +34,6 @@ services:
 
 volumes:
   postgres_data:
+  moodle_dataroot:
+  behat_dataroot:
+  phpunit_dataroot:
