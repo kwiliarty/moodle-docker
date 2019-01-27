@@ -9,7 +9,7 @@ services:
       - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/apache2_faildumps.conf"
       - moodle_dataroot:/var/www/moodledata
       - behat_dataroot:/var/www/behatdata
-      - phpunit_dataroot:/var/www/phpunit_data
+      - phpunit_dataroot:/var/www/phpunitdata
     environment:
       MOODLE_DOCKER_DBTYPE: pgsql
       MOODLE_DOCKER_DBNAME: moodle
