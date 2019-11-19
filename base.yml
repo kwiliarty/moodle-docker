@@ -4,12 +4,6 @@ services:
     image: "moodlehq/moodle-php-apache:${MOODLE_DOCKER_PHP_VERSION}"
     depends_on:
       - db
-    volumes:
-      - "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
-      - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/apache2_faildumps.conf"
-      - moodle_dataroot:/var/www/moodledata
-      - behat_dataroot:/var/www/behatdata
-      - phpunit_dataroot:/var/www/phpunitdata
     environment:
       MOODLE_DOCKER_DBTYPE: pgsql
       MOODLE_DOCKER_DBNAME: moodle
@@ -29,8 +23,6 @@ services:
     image: moodlehq/moodle-exttests
   selenium:
     image: "selenium/standalone-firefox${MOODLE_DOCKER_SELENIUM_SUFFIX}:2.53.1"
-    volumes:
-      - "${MOODLE_DOCKER_WWWROOT}:/var/www/html:ro"
 
 volumes:
   postgres_data:

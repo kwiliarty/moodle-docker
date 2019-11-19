@@ -3,5 +3,3 @@
 version: "2"
 services:
   webserver:
-    volumes:
-        - "${MOODLE_DOCKER_WWWROOT}:/var/www/html:cached"
