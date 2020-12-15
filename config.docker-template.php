@@ -20,7 +20,12 @@ if (!empty(getenv('MOODLE_DOCKER_WEB_HOST'))) {
 $CFG->wwwroot   = "http://{$host}";
 $port = getenv('MOODLE_DOCKER_WEB_PORT');
 if (!empty($port)) {
-    $CFG->wwwroot .= ":{$port}";
+    // Extract port in case the format is bind_ip:port.
+    $parts = explode(':', $port);
+    $port = end($parts);
+    if ((string)(int)$port === (string)$port) { // Only if it's int value.
+        $CFG->wwwroot .= ":{$port}";
+    }
 }
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
@@ -35,6 +40,8 @@ $CFG->perfdebug = 15;
 $CFG->debugpageinfo = 1;
 $CFG->allowthemechangeonurl = 1;
 $CFG->passwordpolicy = 0;
+$CFG->cronclionly = 0;
+$CFG->pathtophp = '/usr/local/bin/php';
 
 $CFG->phpunit_dataroot  = '/var/www/phpunitdata';
 $CFG->phpunit_prefix = 't_';
@@ -52,6 +59,10 @@ $CFG->behat_profiles = array(
 $CFG->behat_faildump_path = '/var/www/behatfaildumps';
 
 define('PHPUNIT_LONGTEST', true);
+
+if (getenv('MOODLE_DOCKER_APP')) {
+    $CFG->behat_ionic_wwwroot = 'http://moodleapp:8100';
+}
 
 if (getenv('MOODLE_DOCKER_PHPUNIT_EXTRAS')) {
     define('TEST_SEARCH_SOLR_HOSTNAME', 'solr');
